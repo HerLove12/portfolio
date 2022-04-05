@@ -171,8 +171,9 @@ body {
   .mezzo {
     padding-top: 40px;
     padding-bottom: 20px;
-    margin-left: 650px;
-    margin-right: 650px;
+    position: relative;
+    transform: translate(-50%);
+    left: 50%;
   }
 
   .mezzo pre{
@@ -253,6 +254,10 @@ body {
     font-size: 80px;
   }
 
+  .mezzo{
+    display: none;
+  }
+
 }
 
 @media only screen and (max-width: 500px){
@@ -278,6 +283,7 @@ body {
   .colonna {
     line-height: 40px;
   }
+
 
 }
 
