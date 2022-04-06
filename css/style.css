@@ -11,6 +11,7 @@ body {
     color: #e5e4e2;
     font-family: 'Courier Prime', monospace; 
     height: auto;
+    cursor: default;
 }
 
 .barramenu {
