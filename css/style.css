@@ -172,19 +172,15 @@ body {
   .mezzo {
     padding-top: 40px;
     padding-bottom: 20px;
-    position: relative;
-    transform: translate(-50%);
-    left: 50%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
   }
 
-  .mezzo pre{
-    text-align: center;
-    font-size: 5px;
-    transition: color 1s;
-  }
-
-  .mezzo pre:hover{
-    color: red;
+  .mezzo img {
+    width: 400px;
+    height: 450px;
+    margin-top: 5vh;
   }
 
   ::-webkit-scrollbar {
@@ -199,12 +195,6 @@ body {
     background: #e5e4e2; 
   }
 
-
-  @media only screen and (max-width: 1879px){
-    .mezzo p{
-      display: none;
-    }
-  }
 
   @media only screen and (max-width: 1490px){
 
@@ -250,11 +240,6 @@ body {
   .header {
     font-size: 80px;
   }
-
-  .mezzo{
-      display: none;
-  }
-  
 
 }
 
@@ -338,6 +323,11 @@ body {
 
   .social div {
     display: none;
+  }
+  
+  .mezzo p{
+    display: block !important;
+    position: absolute;
   }
 }
 
@@ -473,4 +463,23 @@ body {
   .colonna:hover:before {
     left: 850px;
     background: rgba(255, 255, 255, 0.2);
+  }
+
+  .col {
+    display: flex !important;
+    justify-content: center !important;
+    border-radius: 20px !important;
+    text-align: center;
+  }
+
+  .card-title{
+    text-shadow: 3px 3px 3px #494949;
+  }
+
+  .col img{
+    border-radius: 20px !important;
+  }
+
+  .skorzi{
+    width: 30vw;
   }
