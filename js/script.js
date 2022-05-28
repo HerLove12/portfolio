@@ -20,11 +20,6 @@ window.onload = function () {
 }
 //aggiunta coordinate casuali nell'array di bombe
 function aggiungiBombe() {
-    //posBombe.push("2-2");
-    //posBombe.push("2-3");
-    //posBombe.push("5-6");
-    //posBombe.push("3-4");
-    //posBombe.push("1-1");
 
     let bombeRimaste = bombeC;
     while (bombeRimaste > 0) {
