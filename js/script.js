@@ -1,178 +1,200 @@
-document.onkeyup = function (e) {
-    if (e.ctrlKey && e.which == 88) {
+document.addEventListener("keyup", (e)=>{
+    if (e.ctrlKey && e.which === 88) {
         window.location.href = "../pages/supersecretpage.html";
     }
-};
+})
 
-//campo minato
-
-let campo = [];
-let colonne = 8;
-let righe = 8;
-let bombeC = 9;
-let flag = false;
-let perso = false;
-let posBombe = [];
-let casellaOn = 0;
-
-window.onload = function () {
-    inizio();
-}
-//aggiunta coordinate casuali nell'array di bombe
-function aggiungiBombe() {
-
-    let bombeRimaste = bombeC;
-    while (bombeRimaste > 0) {
-        let i = Math.floor(Math.random() * righe)
-        let j = Math.floor(Math.random() * colonne)
-        let id = i.toString() + "-" + j.toString();
-
-        if (!posBombe.includes(id)) {
-            posBombe.push(id);
-            bombeRimaste -= 1;
-        }
-    }
-}
-
-function bandieraccia(e) {
-    e.preventDefault();
-    flag = true;
-    console.log(flag);
-    casellaCliccata.call(this);
+class Game {
+    bombeC;
+    campo = [];
+    colonne = 8;
+    righe = 8;
     flag = false;
-}
-
-function inizio() {
-    document.getElementById("bombe-rimaste").innerText = bombeC;
-    document.getElementById("bottone-flag").addEventListener("click",() => {
-        flag = !flag;
-    });
-    aggiungiBombe();
+    perso = false;
+    posBombe = [];
+    casellaOn = 0;
 
 
-    for (let i = 0; i < righe; i++) {
+    tavola = document.getElementById("tavola");
+    bombeRimaste = document.getElementById("bombe-rimaste");
+    bottoneFlag = document.getElementById("bottone-flag");
 
-        let riga = [];
 
-        for (let j = 0; j < colonne; j++) {
+    constructor(bombeC) {
+        this.bombeC = Number(bombeC);
 
-            //riempio le righe di caselle che hanno dentro un div
-            //e come id le rispettive coordinate x-y
+        this.bombeRimaste.innerText = this.bombeC;
+        this.bottoneFlag.addEventListener("click",() => {
+            this.flag = !this.flag;
+        });
+        this.aggiungiBombe();
 
-            let casella = document.createElement("div");
-            casella.id = i.toString() + "-" + j.toString();
-            casella.addEventListener("click", casellaCliccata);
-            casella.addEventListener("contextmenu", bandieraccia);
-            document.getElementById("tavola").append(casella);
-            riga.push(casella); //inserimento di ogni casella nella riga
+
+        for (let i = 0; i < this.righe; i++) {
+
+            let riga = [];
+
+            for (let j = 0; j < this.colonne; j++) {
+
+                //riempio le righe di caselle che hanno dentro un div
+                //e come id le rispettive coordinate x-y
+
+                let casella = document.createElement("div");
+                casella.id = i.toString() + "-" + j.toString();
+                casella.addEventListener("click", (e)=>{
+                    this.casellaCliccata(e.target)
+                });
+                casella.addEventListener("contextmenu", (e)=>{
+                    this.bandieraccia(e)
+                });
+                this.tavola.append(casella);
+                riga.push(casella); //inserimento di ogni casella nella riga
+            }
+
+            this.campo.push(riga); //inserimento di ogni riga nel campo
         }
 
-        campo.push(riga); //inserimento di ogni riga nel campo
+        console.log(this.campo);
     }
 
-    console.log(campo);
-}
-
-
-//funzione per mettere o rimuovere le banierine
-function casellaCliccata() {
-    if (perso || this.classList.contains("click-casella")) {
-        return;
+    destroy(){
+        this.tavola.innerHTML = "";
     }
 
-    let casella = this;
-    if (flag) {
-        if (casella.innerText == "") {
-            casella.innerText = "🚩";
-        }
-        else if (casella.innerText == "🚩") {
-            casella.innerText = "";
-        }
-        return;
-    }
+    aggiungiBombe() {
+        let bombeRimaste = this.bombeC;
+        while (bombeRimaste > 0) {
+            let i = Math.floor(Math.random() * this.righe)
+            let j = Math.floor(Math.random() * this.colonne)
+            let id = i.toString() + "-" + j.toString();
 
-    if (posBombe.includes(casella.id)) {
-        //alert("Hai Perso");
-        perso = true;
-        mostraBombe();
-        return;
-    }
-
-    let coordinate = casella.id.split("-");
-    let i = parseInt(coordinate[0]);
-    let j = parseInt(coordinate[1]);
-    controllaBombe(i, j);
-}
-
-function mostraBombe() {
-    for (let i = 0; i < righe; i++) {
-        for (let j = 0; j < colonne; j++) {
-            let casella = campo[i][j];
-            if (posBombe.includes(casella.id)) {
-                casella.innerText = "💣"
-                casella.style.backgroundColor = "red";
+            if (!this.posBombe.includes(id)) {
+                this.posBombe.push(id);
+                bombeRimaste -= 1;
             }
         }
     }
-}
 
-function controllaBombe(i, j) {
-    if (i < 0 || j < 0 || i >= righe || j >= colonne) {
-        return;
+    bandieraccia(e) {
+        e.preventDefault();
+        this.flag = true;
+        console.log(this.flag);
+        this.casellaCliccata(e.target);
+        this.flag = false;
+    }
+    //funzione per mettere o rimuovere le banierine
+    casellaCliccata(casella) {
+        if (this.perso || casella.classList.contains("click-casella")) {
+            return;
+        }
+
+        if (this.flag) {
+            if (casella.innerText === "") {
+                casella.innerText = "🚩";
+            }
+            else if (casella.innerText === "🚩") {
+                casella.innerText = "";
+            }
+            return;
+        }
+
+        if (this.posBombe.includes(casella.id)) {
+            //alert("Hai Perso");
+            this.perso = true;
+            this.mostraBombe();
+            return;
+        }
+
+        let coordinate = casella.id.split("-");
+        let i = parseInt(coordinate[0]);
+        let j = parseInt(coordinate[1]);
+        this.controllaBombe(i, j);
     }
 
-    if (campo[i][j].classList.contains("click-casella")) {
-        return;
+    mostraBombe() {
+        for (let i = 0; i < this.righe; i++) {
+            for (let j = 0; j < this.colonne; j++) {
+                let casella = this.campo[i][j];
+                if (this.posBombe.includes(casella.id)) {
+                    casella.innerText = "💣"
+                    casella.style.backgroundColor = "red";
+                }
+            }
+        }
     }
 
-    campo[i][j].classList.add("click-casella");
-    casellaOn += 1;
+    controllaBombe(i, j) {
+        if (i < 0 || j < 0 || i >= this.righe || j >= this.colonne) {
+            return;
+        }
 
-    let bombeTrovate = 0;
+        if (this.campo[i][j].classList.contains("click-casella")) {
+            return;
+        }
 
-    bombeTrovate += controllaCasella(i - 1, j - 1);
-    bombeTrovate += controllaCasella(i - 1, j);
-    bombeTrovate += controllaCasella(i - 1, j + 1);
+        this.campo[i][j].classList.add("click-casella");
+        this.casellaOn += 1;
 
-    bombeTrovate += controllaCasella(i, j - 1);
-    bombeTrovate += controllaCasella(i, j + 1);
+        let bombeTrovate = 0;
 
-    bombeTrovate += controllaCasella(i + 1, j - 1);
-    bombeTrovate += controllaCasella(i + 1, j);
-    bombeTrovate += controllaCasella(i + 1, j + 1);
+        bombeTrovate += this.controllaCasella(i - 1, j - 1);
+        bombeTrovate += this.controllaCasella(i - 1, j);
+        bombeTrovate += this.controllaCasella(i - 1, j + 1);
 
-    if (bombeTrovate > 0) {
-        campo[i][j].innerText = bombeTrovate;
-        campo[i][j].classList.add("n" + bombeTrovate.toString());
+        bombeTrovate += this.controllaCasella(i, j - 1);
+        bombeTrovate += this.controllaCasella(i, j + 1);
+
+        bombeTrovate += this.controllaCasella(i + 1, j - 1);
+        bombeTrovate += this.controllaCasella(i + 1, j);
+        bombeTrovate += this.controllaCasella(i + 1, j + 1);
+
+        if (bombeTrovate > 0) {
+            this.campo[i][j].innerText = bombeTrovate;
+            this.campo[i][j].classList.add("n" + bombeTrovate.toString());
+        }
+        else {
+            this.controllaBombe(i - 1, j - 1);
+            this.controllaBombe(i - 1, j);
+            this.controllaBombe(i - 1, j + 1);
+
+            this.controllaBombe(i, j - 1);
+            this.controllaBombe(i, j + 1);
+
+            this.controllaBombe(i + 1, j - 1);
+            this.controllaBombe(i + 1, j);
+            this.controllaBombe(i + 1, j + 1);
+
+        }
+
+        console.table({ casellaOn: this.casellaOn, bombeC: this.bombeC, righe: this.righe, colonne: this.colonne })
+
+        if (this.bombeC === this.righe * this.colonne - this.casellaOn) {
+            this.bombeRimaste.innerText = "Hai finito!"
+            this.perso = true;
+        }
     }
-    else {
-        controllaBombe(i - 1, j - 1);
-        controllaBombe(i - 1, j);
-        controllaBombe(i - 1, j + 1);
 
-        controllaBombe(i, j - 1);
-        controllaBombe(i, j + 1);
-
-        controllaBombe(i + 1, j - 1);
-        controllaBombe(i + 1, j);
-        controllaBombe(i + 1, j + 1);
-
-    }
-
-    console.table({ casellaOn, bombeC, righe, colonne })
-
-    if (bombeC == righe * colonne - casellaOn) {
-        document.getElementById("bombe-rimaste").innerText = "Hai finito!"
-        perso = true;
-    }
-}
-
-function controllaCasella(i, j) {
-    if (i < 0 || j < 0 || i >= righe || j >= colonne) {
+    controllaCasella(i, j) {
+        if (i < 0 || j < 0 || i >= this.righe || j >= this.colonne) {
+            return 0;
+        }
+        if (this.posBombe.includes(i.toString() + "-" + j.toString())) {
+            return 1;
+        }
         return 0;
     }
-    if (posBombe.includes(i.toString() + "-" + j.toString())) {
-        return 1;
-    }
-    return 0;
+
 }
+
+const input = document.getElementById("inseriscibombe");
+let game = new Game(input.value);
+
+input.addEventListener("change", ()=>{
+    game.destroy()
+    game = new Game(input.value);
+})
+
+document.getElementById("restart").addEventListener("click", ()=>{
+    game.destroy();
+    game = new Game(input.value);
+})

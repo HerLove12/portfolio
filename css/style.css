@@ -25,7 +25,7 @@ body {
 .barramenu {
   height: 51px;
   background-color: rgb(48, 48, 48);
-  box-shadow: 8px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: start;
   position: relative;
@@ -101,7 +101,6 @@ body {
 
 .dropdown {
   height: 51px;
-  margin-left: px;
   background-color: rgb(48, 48, 48);
   position: relative;
   display: inline-block;
@@ -181,7 +180,7 @@ body {
 }
 
 .colonna:hover {
-  box-shadow: 10px 10px 16px 0px rgba(7, 7, 7, 0.281);
+  box-shadow: 10px 10px 16px 0 rgba(7, 7, 7, 0.281);
   animation: wobble 1s;
 
 }
@@ -397,16 +396,16 @@ hr.linea {
   line-height: 75px;
   width: 100%;
   background-color: rgba(56, 56, 56, 0.904);
-  box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 10px 10px 10px 0 rgba(0, 0, 0, 0.2);
   transition: box-shadow 1s;
 }
 
 .galleria div:hover {
-  box-shadow: 20px 20px 20px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 20px 20px 20px 0 rgba(0, 0, 0, 0.2);
 }
 
 .galleria img {
-  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.2);
   width: 100%;
   height: 80%;
 }
@@ -591,4 +590,32 @@ hr.linea {
 
 .n8{
   color: rgb(68, 0, 65);
+}
+
+#bottone-flag{
+  margin-top: 30px;
+  width: 100px;
+  height: 30px;
+  border-radius: 20px;
+  border: none;
+}
+
+#bottone-flag:hover{
+  background-color: gray;
+}
+
+#inseriscibombe{
+  margin: 25px 0 25px 0;
+  font-family: 'Courier Prime', monospace;
+}
+
+#inseriscibombe:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none; 
 }
