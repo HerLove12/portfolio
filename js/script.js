@@ -5,6 +5,7 @@ document.addEventListener("keyup", (e)=>{
 })
 
 class Game {
+    
     bombeC;
     campo = [];
     colonne = 8;
