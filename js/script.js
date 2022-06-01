@@ -27,6 +27,12 @@ class Game {
         this.bombeRimaste.innerText = this.bombeC;
         this.bottoneFlag.addEventListener("click",() => {
             this.flag = !this.flag;
+            if(this.flag){
+                this.bottoneFlag.style.backgroundColor = "gray"
+            }
+            else{
+                this.bottoneFlag.style.backgroundColor = "white"
+            }
         });
         this.aggiungiBombe();
 

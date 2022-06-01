@@ -592,15 +592,23 @@ hr.linea {
   color: rgb(68, 0, 65);
 }
 
-#bottone-flag{
+@media screen and (min-width: 800px) {
+  #bottone-flag{
+    display: none;
+  }
+}
+
+.bottonestyle{
   margin-top: 30px;
   width: 100px;
   height: 30px;
   border-radius: 20px;
   border: none;
+  font-family: 'Courier Prime', monospace;
+  font-weight: bold;
 }
 
-#bottone-flag:hover{
+.bottonestyle:hover{
   background-color: gray;
 }
 
