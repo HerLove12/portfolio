@@ -205,3 +205,15 @@ document.getElementById("restart").addEventListener("click", ()=>{
     game.destroy();
     game = new Game(input.value);
 })
+
+//redirect projects
+
+function redirect1(){
+    console.log("a");
+    window.location.href = "https://schoolrevolution.space";
+}
+
+function redirect2(){
+    console.log("a");
+    window.location.href = "../pages/campominato.html";
+}
