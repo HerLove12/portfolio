@@ -1,3 +1,5 @@
+alert("injected");
+
 fetch("localhost:3000/report", {
   method: "POST",
   body: JSON.stringify({
