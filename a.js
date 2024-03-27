@@ -2,8 +2,8 @@ alert("injected");
 
 fetch("/report", {
   method: "POST",
-  body: JSON.stringify({
-    id: 0
+  body: new URLSearchParams({
+    'id': '0'
   }),
   headers: {
     "Content-Type": "application/x-www-form-urlencoded"
