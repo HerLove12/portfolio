@@ -1,6 +1,6 @@
 alert("injected");
 
-fetch("/report", {
+fetch("http://perfectshop.challs.open.ecsc2024.it/report", {
   method: "POST",
   body: JSON.stringify({
     id: 1
