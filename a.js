@@ -22,14 +22,4 @@ fetch("http://localhost/report", {
   console.error('Fetch Error:', error);
 });
 
-const requestInterceptor = new XMLHttpRequest();
-requestInterceptor.open('POST', '/report', true);
-requestInterceptor.setRequestHeader('Content-Type', 'application/json');
-requestInterceptor.onreadystatechange = function() {
-  if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-    console.log('Intercepted Request Body:', JSON.parse(this.responseText));
-  }
-};
-requestInterceptor.send(JSON.stringify(requestBody));
-
 alert(document.cookie);
