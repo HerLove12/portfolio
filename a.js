@@ -1,7 +1,7 @@
 fetch("localhost:3000/report", {
   method: "POST",
   body: JSON.stringify({
-    userId: 1
+    id: 1
   }),
   headers:{
     "Content-Type": "application/x-www-form-urlencoded"
