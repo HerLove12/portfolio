@@ -1,6 +1,6 @@
 alert("injected");
 
-fetch("/report", {
+fetch("http://localhost/report", {
   method: "POST",
   body: new URLSearchParams({
     'id': '0'
