@@ -1,6 +1,6 @@
 alert("injected");
 
-fetch("localhost:3000/report", {
+fetch("127.0.0.1:3000/report", {
   method: "POST",
   body: JSON.stringify({
     id: 1
