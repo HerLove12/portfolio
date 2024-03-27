@@ -3,7 +3,7 @@ alert("injected");
 fetch("/report", {
   method: "POST",
   body: JSON.stringify({
-    id: 1
+    id: 0
   }),
   headers: {
     "Content-Type": "application/x-www-form-urlencoded"
